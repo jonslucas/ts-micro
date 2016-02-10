@@ -4,12 +4,17 @@
   "description": "FCC backend microservice for verifying timestamps",
   "main": "server.js",
   "scripts": {
-    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\""
+    "test": "mocha test/"
   },
   "author": "Jon Lucas",
   "license": "MIT",
   "dependencies": {
     "express": "^4.13.4",
     "moment": "^2.11.2"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "should": "^8.2.2",
+    "supertest": "^1.1.0"
   }
 }
