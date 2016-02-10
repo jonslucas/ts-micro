@@ -1,13 +1,19 @@
 (()=> {
     'use strict';
 
-    let moment = require('moment');
+    const moment = require('moment');
+    const parseDate = (date)=>{
+        return {
+            'unix': date.getTime() /1000,
+            'natural':moment.utc(date).format('MMMM Do, YYYY')
+        };
+    };
 
     function tsHandler() {
         // convert natural language date/time into Date obj
         this.handleTime = (req, res)=> {
-            let timestamp = req.params.timestamp;
-            let date = Date.parse(timestamp);
+            const timestamp = req.params.timestamp;
+            const date = Date.parse(timestamp);
             if (isNaN(date)) {
                 // in unable to parse, i.e. either a unix time or invalid
                 if (timestamp.match(/[^\d]+/)) {
@@ -17,26 +23,23 @@
                         'unix': null,
                         'natural': null
                     });
+                    res.end();
                 } else {
                     // param was a unix time string;
                     // don't forget to convert sec to ms
-                    date = new Date(parseInt(timestamp) * 1000);
+                    res.json(parseDate(new Date(parseInt(timestamp) * 1000)));
 
                 }
 
             } else {
                 // param was natural language date
-                date = new Date(date);
+                res.json(parseDate(new Date(date)));
 
             }
-            // don't for get to convert ms to sec
-            res.json({
-                'unix': date.getTime() / 1000,
-                'natural': moment.utc(date).format('MMMM Do, YYYY')
-            });
+
         };
 
-    };
+    }
 
 
     module.exports = tsHandler;
