@@ -5,8 +5,13 @@
   "main": "server.js",
   "scripts": {
     "lint": "jshint **.js",
-    "pretest": "npm run lint",
-    "test": "mocha test/"
+    "test:mocha": "mocha test/",
+    "pretest": "npm run lint -s",
+    "test": "npm run test:mocha -s",
+    "prebuild:css": "node-sass --include-path scss ./public/css/*.scss ./public/css/main.css",
+    "build:css": "cssmin ./public/css/main.css > ./public/css/main.min.css",
+    "build": "npm run build:css -s",
+    "serve": "npm test && npm run build && npm start"
   },
   "author": "Jon Lucas",
   "license": "MIT",
@@ -15,8 +20,10 @@
     "moment": "^2.11.2"
   },
   "devDependencies": {
+    "cssmin": "^0.4.3",
     "jshint": "^2.9.1",
     "mocha": "^2.4.5",
+    "node-sass": "^3.4.2",
     "should": "^8.2.2",
     "supertest": "^1.1.0"
   }

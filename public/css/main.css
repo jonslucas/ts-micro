@@ -1,0 +1,17 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.container {
+  width: 40em;
+  margin: 0 auto;
+  font-family: 'Montserrat', sans-serif; }
+  .container .title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 5em; }
+
+.example-div span {
+  display: block;
+  color: red;
+  font-family: 'Roboto', sans-serif; }
+
+.gotcha-div p {
+  font-style: italic; }
